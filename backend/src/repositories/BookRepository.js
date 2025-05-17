@@ -1,0 +1,26 @@
+const Book = require('../models/Book');
+
+class BookRepository {
+  async createBook(bookData) {
+    const book = new Book(bookData);
+    return await book.save();
+  }
+
+  async findAllByUser(userId) {
+    return await Book.find({ userId });
+  }
+
+  async findById(id) {
+    return await Book.findById(id);
+  }
+
+  async updateBook(id, updateData) {
+    return await Book.findByIdAndUpdate(id, updateData, { new: true });
+  }
+
+  async deleteBook(id) {
+    return await Book.findByIdAndDelete(id);
+  }
+}
+
+module.exports = new BookRepository();
