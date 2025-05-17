@@ -9,11 +9,14 @@ import { useAuth } from './context/AuthContext';
 
 // PrivateRoute component to check if user is authenticated
 const PrivateRoute = ({ element }) => {
-  const {user, loading } = useAuth(); 
+  const { user, loading } = useAuth();
 
-  if (loading) return null; 
+  if (loading) return null;
 
-  // return user ? element : <Navigate to="/" replace />;
+  // Check if user exists and has a valid email
+  const isValidUser = user && typeof user.email === 'string' && user.email.length > 0;
+
+  return isValidUser ? element : <Navigate to="/" replace />;
 };
 
 function Router() {

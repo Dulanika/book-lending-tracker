@@ -31,11 +31,15 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
 const login = (userData, authToken) => {
-  setUser(userData);
+  // If userData is an array: [id, email, name]
+  const [id, email, name] = userData;
+  const userObj = { id, email, name };
+
+  setUser(userObj);
   setToken(authToken);
-  localStorage.setItem('user', JSON.stringify(userData)); // Store as string
+  localStorage.setItem('user', JSON.stringify(userObj)); // Store as object
   localStorage.setItem('token', authToken);
-  navigate('/dashboard'); // Correct path
+  navigate('/dashboard');
 };
 
   const logout = () => {

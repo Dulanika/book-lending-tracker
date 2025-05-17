@@ -18,24 +18,19 @@ function LoginForm() {
     e.preventDefault();
     setIsLoading(true);
 
-    try {
-      
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
-      const { user, token } = response.data;
-      console.log('Login response:', response.data);
-      login(user, token);
-      toast.success('Logged in successfully!');
-
-      // setTimeout(() => {
-      //   navigate('/dashboard');
-      // }, 100);
-    } catch (err) {
-      console.error('Login error:', err);
-      toast.error(err.response?.data?.message || 'Login failed!');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+ try {
+    const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+    const { userData, token } = response.data; // <-- get userData and token
+    console.log('Login response:', response.data);
+    login(userData, token); // <-- pass userData to login
+    toast.success('Logged in successfully!');
+  } catch (err) {
+    console.error('Login error:', err);
+    toast.error(err.response?.data?.message || 'Login failed!');
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto space-y-4">
