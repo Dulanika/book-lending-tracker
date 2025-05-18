@@ -22,7 +22,7 @@ export const useBookStats = () => {
       }
 
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/books/stats`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/dashboard/stats`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

@@ -6,6 +6,7 @@ import Library from './pages/Library';
 import Dashboard from './pages/Dashboard';
 import MainLayout from './layouts/MainLayout';
 import { useAuth } from './context/AuthContext';
+import { BookProvider } from './context/BookContext'; 
 
 // PrivateRoute component to check if user is authenticated
 const PrivateRoute = ({ element }) => {
@@ -21,23 +22,25 @@ const PrivateRoute = ({ element }) => {
 
 function Router() {
   return (
-    <AuthProvider>
-    <Routes>
-      {/* Public Route */}
-      <Route path="/" element={<Home />} />
+   <AuthProvider>
+      <BookProvider>
+        <Routes>
+          {/* Public Route */}
+          <Route path="/" element={<Home />} />
 
-      {/* Protected Routes wrapped in Layout */}
-      <Route element={<MainLayout />}>
-        <Route
-          path="/library"
-          element={<PrivateRoute element={<Library />} />} 
-        />
-        <Route
-          path="/dashboard"
-          element={<PrivateRoute element={<Dashboard />} />} 
-        />
-      </Route>
-    </Routes>
+          {/* Protected Routes wrapped in Layout */}
+          <Route element={<MainLayout />}>
+            <Route
+              path="/library"
+              element={<PrivateRoute element={<Library />} />} 
+            />
+            <Route
+              path="/dashboard"
+              element={<PrivateRoute element={<Dashboard />} />} 
+            />
+          </Route>
+        </Routes>
+      </BookProvider>
     </AuthProvider>
   ); 
 }

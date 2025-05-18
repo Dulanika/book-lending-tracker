@@ -12,7 +12,7 @@ class BookController {
   }
 
   async getBooks(req, res) {
-    try {
+    try { 
       const books = await BookService.getUserBooks(req.user._id);
       res.json(books);
     } catch (error) {

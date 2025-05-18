@@ -5,32 +5,39 @@ import { toast } from 'react-toastify';
 const LendBookForm = ({ bookId, onClose, refreshBooks }) => {
   const [borrower, setBorrower] = useState('');
   const [lendDate, setLendDate] = useState('');
-  const [returnDate, setReturnDate] = useState('');
+  // const [expectedReturnDate, setExpectedReturnDate] = useState('');
+
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem('token');
+  e.preventDefault();
+  const token = localStorage.getItem('token');
 
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/books/${bookId}/lend`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ borrower, lendDate, returnDate }),
-      });
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/lend/${bookId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        bookId,
+        borrowerName: borrower,
+        lendDate,
+        // expectedReturnDate: expectedReturnDate,
+      }),
+    });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Failed to lend book');
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Failed to lend book');
 
-      toast.success('Book lent successfully!');
-      refreshBooks();
-      onClose();
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
+    toast.success('Book lent successfully!');
+    refreshBooks();
+    onClose();
+  } catch (err) {
+    toast.error(err.message);
+  }
+};
+
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 bg-white p-4 rounded shadow">
@@ -45,6 +52,7 @@ const LendBookForm = ({ bookId, onClose, refreshBooks }) => {
         required
       />
 
+      <label>Lend Date</label>
       <input
         type="date"
         value={lendDate}
@@ -53,12 +61,13 @@ const LendBookForm = ({ bookId, onClose, refreshBooks }) => {
         required
       />
 
+      {/* <label>Return Date</label>
       <input
         type="date"
-        value={returnDate}
-        onChange={(e) => setReturnDate(e.target.value)}
+        value={expectedReturnDate}
+        onChange={(e) => setExpectedReturnDate(e.target.value)}
         className="w-full border p-2 rounded"
-      />
+      /> */}
 
       <div className="flex justify-end space-x-2">
         <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-300 rounded">Cancel</button>

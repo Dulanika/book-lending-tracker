@@ -12,26 +12,24 @@ class AuthController {
   }
 
   async login(req, res) {
-    console.log('Login route hit');
-    try {
-      console.log('Login controller hit');
-      const { email, password } = req.body;
-      const token = await AuthService.login(email, password);
-        res.json({
+  console.log('Login route hit');
+  try {
+    const { email, password } = req.body;
+    const { token, user } = await AuthService.login(email, password);
+
+    res.json({
       token,
       userData: {
-        id: user.id,
+        id: user._id,
         email: user.email,
         name: user.name,
-        password: user.password,
       },
     });
-      console.log('Login successful:', token);
-      console.log('Login successful:', userData);
-    } catch (error) {
-      res.status(400).json({ message: error.message });
-    }
+    console.log('Login successful:', token);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
+}
 }
 
 module.exports = new AuthController();

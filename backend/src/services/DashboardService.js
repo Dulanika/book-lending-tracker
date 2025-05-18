@@ -8,8 +8,10 @@ class DashboardService {
 
     const borrowedBooks = allBooks.filter(b => b.status === 'borrowed').length;
 
-    const lendHistory = await LendRepository.findLendsByUser(userId);
-    const overdueBooks = lendHistory.filter(record => {
+    const lendHistoryResult = await LendRepository.findLendsByUser(userId);
+    const lendRecords = lendHistoryResult.records;
+
+    const overdueBooks = lendRecords.filter(record => {
       return (
         !record.returned &&
         record.expectedReturnDate &&
@@ -24,5 +26,6 @@ class DashboardService {
     };
   }
 }
+
 
 module.exports = new DashboardService();

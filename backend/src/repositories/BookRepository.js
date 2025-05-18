@@ -6,9 +6,9 @@ class BookRepository {
     return await book.save();
   }
 
-  async findAllByUser(userId) {
-    return await Book.find({ userId });
-  }
+async findAllByUser(userId) {
+  return await Book.find({ userId }).select('title author genre status actualReturnDate');
+}
 
   async findById(id) {
     return await Book.findById(id);

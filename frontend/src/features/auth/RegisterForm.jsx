@@ -19,7 +19,7 @@ const RegisterForm = () => {
     setIsLoading(true); 
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', formData);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, formData);
       const { user, token } = response.data;
       login(user, token);
       toast.success('Sign up successfully!');

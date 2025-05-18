@@ -1,4 +1,4 @@
-// src/context/AuthContext.js
+
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,13 +31,11 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
 const login = (userData, authToken) => {
-  // If userData is an array: [id, email, name]
-  const [id, email, name] = userData;
-  const userObj = { id, email, name };
+  const userObj = userData; // ✅ Correctly handle object
 
   setUser(userObj);
   setToken(authToken);
-  localStorage.setItem('user', JSON.stringify(userObj)); // Store as object
+  localStorage.setItem('user', JSON.stringify(userObj));
   localStorage.setItem('token', authToken);
   navigate('/dashboard');
 };

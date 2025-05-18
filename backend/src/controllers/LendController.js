@@ -3,6 +3,7 @@ const LendService = require('../services/LendService');
 class LendController {
   async lendBook(req, res) {
     try {
+      console.log('Request Body:', req.body);
       const { bookId, borrowerName, lendDate, expectedReturnDate } = req.body;
       const record = await LendService.lendBook(
         req.user._id.toString(),
@@ -13,6 +14,7 @@ class LendController {
       );
       res.status(201).json(record);
     } catch (error) {
+      console.error('LendBook Error:', error.message);
       res.status(400).json({ message: error.message });
     }
   }
@@ -26,6 +28,16 @@ class LendController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  async getLendHistory(req, res) {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const result = await LendService.getLendHistory(req.user._id, page);
+    res.json(result);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+}
 
   async lendHistory(req, res) {
     try {

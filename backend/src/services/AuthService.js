@@ -18,19 +18,20 @@ class AuthService {
     return this.generateToken(newUser);
   }
 
-  async login(email, password) {
-    const user = await UserRepository.findByEmail(email);
-    if (!user) {
-      throw new Error('Invalid credentials');
-    }
-
-    const isMatch = await bcrypt.compare(password, user.passwordHash);
-    if (!isMatch) {
-      throw new Error('Invalid credentials');
-    }
-
-    return this.generateToken(user);
+async login(email, password) {
+  const user = await UserRepository.findByEmail(email);
+  if (!user) {
+    throw new Error('Invalid credentials');
   }
+
+  const isMatch = await bcrypt.compare(password, user.passwordHash);
+  if (!isMatch) {
+    throw new Error('Invalid credentials');
+  }
+
+  const token = this.generateToken(user);
+  return { token, user };
+}
 
   generateToken(user) {
     const payload = { userId: user._id, name: user.name };
