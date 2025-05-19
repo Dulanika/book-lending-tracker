@@ -1,0 +1,16 @@
+# Node.js
+node_modules/
+
+# Logs
+npm-debug.log*
+
+# dotenv
+.env
+
+# Docker
+*.local
+**/node_modules
+docker-compose.override.yml
+
+# OS-specific
+.DS_Store

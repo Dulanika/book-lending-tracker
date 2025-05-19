@@ -1,6 +1,8 @@
 const BookService = require('../services/BookService');
 
 class BookController {
+
+  // ADD BOOKS
   async addBook(req, res) {
     try {
       const { title, author, genre, status } = req.body;
@@ -11,6 +13,8 @@ class BookController {
     }
   }
 
+  // READ BOOKS
+
   async getBooks(req, res) {
     try { 
       const books = await BookService.getUserBooks(req.user._id);
@@ -19,6 +23,8 @@ class BookController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  // UPDATE BOOK DETAILS
 
   async updateBook(req, res) {
     try {
@@ -30,6 +36,8 @@ class BookController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  // DELETE BOOKS
 
   async deleteBook(req, res) {
     try {

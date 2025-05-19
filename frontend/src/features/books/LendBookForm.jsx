@@ -22,8 +22,7 @@ const LendBookForm = ({ bookId, onClose, refreshBooks }) => {
       body: JSON.stringify({
         bookId,
         borrowerName: borrower,
-        lendDate,
-        // expectedReturnDate: expectedReturnDate,
+        lendDate
       }),
     });
 
@@ -60,15 +59,7 @@ const LendBookForm = ({ bookId, onClose, refreshBooks }) => {
         className="w-full border p-2 rounded"
         required
       />
-
-      {/* <label>Return Date</label>
-      <input
-        type="date"
-        value={expectedReturnDate}
-        onChange={(e) => setExpectedReturnDate(e.target.value)}
-        className="w-full border p-2 rounded"
-      /> */}
-
+      
       <div className="flex justify-end space-x-2">
         <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-300 rounded">Cancel</button>
         <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">Lend</button>

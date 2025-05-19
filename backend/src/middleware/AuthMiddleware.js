@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const UserRepository = require('../repositories/UserRepository');
 
+// This middleware checks if the user is authenticated by verifying the JWT token.
+
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const authMiddleware = async (req, res, next) => {

@@ -1,5 +1,7 @@
 const Book = require('../models/Book');
 
+// This repository handles all database operations related to books
+
 class BookRepository {
   async createBook(bookData) {
     const book = new Book(bookData);

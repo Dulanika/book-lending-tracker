@@ -32,6 +32,7 @@ function Auth() {
           {isLogin ? 'Log In' : 'Create an Account'}
         </h2>
 
+        {/* forms toggle */}
         {isLogin ? (
           <LoginForm onSubmit={handleLogin} isLoading={isLoading} />
         ) : (

@@ -1,6 +1,8 @@
 const AuthService = require('../services/AuthService');
 
 class AuthController {
+
+  // USER REGISTER
   async register(req, res) {
     try {
       const { name, email, password } = req.body;
@@ -11,6 +13,7 @@ class AuthController {
     }
   }
 
+  // USER LOGIN
   async login(req, res) {
   console.log('Login route hit');
   try {

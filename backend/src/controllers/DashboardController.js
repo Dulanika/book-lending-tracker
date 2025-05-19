@@ -1,6 +1,8 @@
 const DashboardService = require('../services/DashboardService');
 
 class DashboardController {
+
+  // TO DISPLAY STATUS OF THE LAIBRARY
   async getStats(req, res) {
     try {
       const stats = await DashboardService.getDashboardStats(req.user._id.toString());

@@ -1,5 +1,6 @@
 const User = require('../models/User');
 
+// This repository handles all database operations related to users
 class UserRepository {
   async findByEmail(email) {
     return await User.findOne({ email });

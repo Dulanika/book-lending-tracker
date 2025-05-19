@@ -20,9 +20,9 @@ function LoginForm() {
 
  try {
     const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, formData);
-    const { userData, token } = response.data; // <-- get userData and token
+    const { userData, token } = response.data; // get userData and token
     console.log('Login response:', response.data);
-    login(userData, token); // <-- pass userData to login
+    login(userData, token); //  pass userData to login
     toast.success('Logged in successfully!');
   } catch (err) {
     console.error('Login error:', err);

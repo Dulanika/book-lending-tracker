@@ -7,7 +7,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(true); // 👈 Add loading flag
+  const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
   // Load user & token from localStorage
@@ -26,12 +26,12 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('user');
       localStorage.removeItem('token');
     } finally {
-      setLoading(false); // ✅ Done loading
+      setLoading(false); 
     }
   }, []);
 
 const login = (userData, authToken) => {
-  const userObj = userData; // ✅ Correctly handle object
+  const userObj = userData; // handle object
 
   setUser(userObj);
   setToken(authToken);

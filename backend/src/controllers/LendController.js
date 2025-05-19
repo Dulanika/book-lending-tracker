@@ -1,6 +1,9 @@
 const LendService = require('../services/LendService');
 
 class LendController {
+
+  // LENDING BOOKS
+
   async lendBook(req, res) {
     try {
       console.log('Request Body:', req.body);
@@ -19,6 +22,8 @@ class LendController {
     }
   }
 
+  // RETURN BOOKS
+
   async returnBook(req, res) {
     try {
       const { bookId } = req.body;
@@ -29,6 +34,10 @@ class LendController {
     }
   }
 
+  // LEND HISTORY
+
+  // 1. LEND HISTORY RECORDS SETUP IN TABLE WITH PAGINATION 
+
   async getLendHistory(req, res) {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -38,6 +47,8 @@ class LendController {
     res.status(400).json({ message: err.message });
   }
 }
+
+// 2. LEND HISTORY RECORDS SETUP IN TABLE
 
   async lendHistory(req, res) {
     try {

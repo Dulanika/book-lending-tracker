@@ -2,6 +2,8 @@ const LendRepository = require('../repositories/LendRepository');
 const BookRepository = require('../repositories/BookRepository');
 const mongoose = require('mongoose');
 
+// This service handles the business logic related to lending books
+// It interacts with the LendRepository and BookRepository to perform operations
 class LendService {
 async lendBook(userId, bookId, borrowerName, lendDate = new Date()) {
   const book = await BookRepository.findById(bookId);

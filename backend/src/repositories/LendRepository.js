@@ -1,5 +1,6 @@
 const LendRecord = require('../models/LendRecord');
 
+// This repository handles all database operations related to lend books
 class LendRepository {
   async createLendRecord(data) {
     const record = new LendRecord(data);
@@ -17,7 +18,8 @@ async findLendsByUser(userId, page = 1, limit = 10) {
     LendRecord.countDocuments({ userId })
   ]);
 
-  // Add isOverdue flag to each record
+  // FILTER OVERDUE RECORDS TO HIGHLIGHT THOSE IN FRONTEND
+
   const now = new Date();
   const recordsWithOverdue = records.map(record => ({
     ...record.toObject(),

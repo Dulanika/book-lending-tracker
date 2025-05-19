@@ -1,5 +1,7 @@
 const BookRepository = require('../repositories/BookRepository');
 
+// This service handles the business logic related to books
+// It interacts with the BookRepository to perform CRUD operations on books
 class BookService {
   async addBook(userId, title, author, genre, status) {
     return await BookRepository.createBook({ userId, title, author, genre, status });

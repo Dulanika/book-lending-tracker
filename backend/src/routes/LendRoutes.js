@@ -3,6 +3,8 @@ const LendController = require('../controllers/LendController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
+
+// Protect all routes
 router.use(authMiddleware);
 
 router.post('/return', LendController.returnBook);

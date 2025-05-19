@@ -2,6 +2,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserRepository = require('../repositories/UserRepository');
 
+// This service handles authentication-related operations such as registration and login.
+// It uses bcrypt for password hashing and JWT for token generation.
+
 const JWT_SECRET = process.env.JWT_SECRET;
 const SALT_ROUNDS = 10;
 
